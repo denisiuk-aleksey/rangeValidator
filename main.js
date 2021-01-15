@@ -1,19 +1,19 @@
 class RangeValidator {
   constructor(from, to) {
-    if (from > to) {
-      throw new RangeError("From can`t be bigger than to");
-    }
-    this._from = from;
-    this._to = to;
+    this.from = from;
+    this.to = to;
   }
 
   set from(value) {
-    let buffer = Number(value);
+    const buffer = Number(value); 
+    if (typeof(buffer) !== "number") {
+      throw new TypeError("Enter validate value!");
+    }
     if (buffer > this._to) {
       throw new RangeError("From can`t be bigger than to");
     }
+   
     this._from = buffer;
-    return;
   }
 
   get from() {
@@ -21,12 +21,14 @@ class RangeValidator {
   }
 
   set to(value) {
-    let buffer = Number(value);
+    const buffer = Number(value);
+    if (typeof(buffer) !== "number") {
+      throw new TypeError("Enter validate value!");
+    }
     if (buffer < this._from) {
       throw new RangeError("To can`t be smaller than from");
     }
     this._from = buffer;
-    return;
   }
 
   get to() {
@@ -38,7 +40,10 @@ class RangeValidator {
   }
 
   validate(number) {
-    let buffer = Number(number);
+    const buffer = Number(number);
+    if (typeof(buffer) !== "number") {
+      throw new TypeError("Enter validate value!");
+    }
     if (buffer > this._to || buffer < this._from) {
       throw new RangeError('Your number not in range!')
     }
